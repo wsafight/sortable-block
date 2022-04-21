@@ -1,4 +1,5 @@
 import svelte from 'rollup-plugin-svelte';
+import { terser } from "rollup-plugin-terser";
 import resolve from '@rollup/plugin-node-resolve';
 import pkg from './package.json';
 
@@ -14,7 +15,14 @@ export default {
 		{ file: pkg.main, 'format': 'umd', name }
 	],
 	plugins: [
-		svelte(),
+		svelte({
+			compilerOptions: {
+				customElement: true,
+				dev: false,
+				immutable: true
+			},
+		}),
+		terser(),
 		resolve()
 	]
 };
