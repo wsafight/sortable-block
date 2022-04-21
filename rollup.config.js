@@ -3,6 +3,9 @@ import { terser } from "rollup-plugin-terser";
 import resolve from '@rollup/plugin-node-resolve';
 import pkg from './package.json';
 
+// 是否是生产环境
+const isProduction = process.env.NODE_ENV === 'production';
+
 const name = pkg.name
 	.replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3')
 	.replace(/^\w/, m => m.toUpperCase())
@@ -19,10 +22,11 @@ export default {
 			compilerOptions: {
 				customElement: true,
 				dev: false,
-				immutable: true
+				immutable: true,
+				tag: 'sortable-block',
 			},
 		}),
-		terser(),
-		resolve()
+		resolve(),
+		isProduction && terser(),
 	]
 };

@@ -1,6 +1,6 @@
-<svelte:options tag='sortable-block'  />
 <script>
     let a = 'hello world';
+    let b = 22234234;
 </script>
 
-<div>{a}</div>
+<div>{a} {b}</div>
